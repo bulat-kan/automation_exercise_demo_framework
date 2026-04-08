@@ -44,3 +44,6 @@ def test_view_products_displays_product_details(page):
     search_results = prod_page.products_list()
 
     expect(search_results.nth(0)).to_contain_text(product_name)
+    search_results.nth(0).page.get_by_role("link", name="View Product").click()
+
+    assert "product_details" in page.url

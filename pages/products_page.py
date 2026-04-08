@@ -7,7 +7,7 @@ class ProductsPage:
     def __init__(self, page: Page):
         self.page = page
 
-    def open(self):
+    def open(self) -> None:
         self.page.goto(self.URL)
 
     def category_heading(self) -> Locator:
