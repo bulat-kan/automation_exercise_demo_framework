@@ -10,17 +10,14 @@ class ProductsPage:
     def open(self):
         self.page.goto(self.URL)
 
-    def page_title(self):
-        return self.page.title()
-
     def category_heading(self) -> Locator:
-        return self.page.get_by_role("heading", "Category")
+        return self.page.get_by_role("heading", name="Category")
 
     def brands_heading(self) -> Locator:
         return self.page.get_by_role("heading", name="Brands")
 
     def all_products_heading(self) -> Locator:
-        return self.page.get_by_role("heading", "All Products")
+        return self.page.get_by_role("heading", name="All Products")
 
     def products_list(self) -> Locator:
         return self.page.locator(".features_items .col-sm-4")
@@ -28,9 +25,9 @@ class ProductsPage:
     def products_search_input(self) -> Locator:
         return self.page.get_by_placeholder("Search Product")
 
-    def product_search_magnifying_glass(self) -> Locator:
-        return self.page.g
+    def search_button(self) -> Locator:
+        return self.page.locator("#submit_search")
 
     def search_for_product(self, product_name: str):
         self.products_search_input().fill(product_name)
-        self.page.locator("#submit_search").click()
+        self.search_button().click()
