@@ -16,6 +16,7 @@ def test_signup_section_visible(page: Page):
     login_page = LoginPage(page)
     login_page.open()
 
+    expect(login_page.signup_form_heading()).to_be_visible()
     expect(login_page.email_signup_input()).to_be_visible()
     expect(login_page.name_signup_input()).to_be_visible()
     expect(login_page.signup_button()).to_be_visible()
@@ -40,7 +41,7 @@ def test_login_successful(page: Page):
     login_page.login(valid_email, valid_password)
 
     expect(login_page.logout_link()).to_be_visible()
-    expect(login_page.logged_in_as_text()).to_be_visible()
+    expect(login_page.logged_in_as_text()).to_contain_text("The Witcher")
 
 
 def test_logout_successful(page: Page):
@@ -52,3 +53,5 @@ def test_logout_successful(page: Page):
     login_page.logout_link().click()
 
     expect(page).to_have_url(login_page.URL)
+    expect(login_page.login_email_input()).to_be_visible()
+    expect(login_page.name_signup_input()).to_be_visible()
