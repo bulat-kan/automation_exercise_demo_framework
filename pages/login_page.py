@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, Locator
+from pages.signup_page import SignupPage
 
 
 class LoginPage:
@@ -45,3 +46,9 @@ class LoginPage:
         self.login_email_input().fill(email)
         self.login_password_input().fill(password)
         self.login_button().click()
+
+    def initial_signup(self, name: str, email: str) -> SignupPage:
+        self.name_signup_input().fill(name)
+        self.email_signup_input().fill(email)
+        self.signup_button().click()
+        return SignupPage(self.page)
