@@ -20,7 +20,7 @@ class LoginPage:
     def login_button(self) -> Locator:
         return self.page.get_by_role("button", name="Login")
 
-    def signup_form_heading(self):
+    def signup_form_heading(self) -> Locator:
         return self.page.get_by_role("heading", name="New User Signup!")
 
     def name_signup_input(self) -> Locator:

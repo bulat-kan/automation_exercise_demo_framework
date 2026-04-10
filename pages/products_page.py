@@ -28,6 +28,6 @@ class ProductsPage:
     def search_button(self) -> Locator:
         return self.page.locator("#submit_search")
 
-    def search_for_product(self, product_name: str):
+    def search_for_product(self, product_name: str) -> None:
         self.products_search_input().fill(product_name)
         self.search_button().click()
