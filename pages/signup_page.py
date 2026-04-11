@@ -11,17 +11,6 @@ class SignupPage:
     def open(self) -> None:
         self.page.goto("https://automationexercise.com/signup")
 
-    # def name_signup_input(self) -> Locator:
-    #     return self.page.get_by_test_id("signup-name")
-
-    # def email_signup_input(self) -> Locator:
-    #     return self.page.get_by_test_id("signup-email")
-
-    # def signup_button(self) -> Locator:
-    #     return self.page.get_by_role("button", name="Signup")
-
-    # sign up form locators
-
     def title_mr(self) -> Locator:
         return self.page.get_by_label("Mr.")
 
