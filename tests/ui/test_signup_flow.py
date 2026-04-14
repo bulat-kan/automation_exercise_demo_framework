@@ -1,7 +1,6 @@
 from playwright.sync_api import expect, Page
 from uuid import uuid4
 from faker import Faker
-from pages.signup_page import SignupPage
 from pages.login_page import LoginPage
 
 

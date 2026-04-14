@@ -29,12 +29,11 @@ def test_product_details_page_components(page: Page):
     product_details_page = ProductDetailsPage(page)
     expect(product_details_page.product_image()).to_be_visible()
 
-    product_label_texts = page.locator(
-        "div.product-information p").all_inner_texts()
-    assert any("Category" in text for text in product_label_texts)
-    assert any("Availability" in text for text in product_label_texts)
-    assert any("Condition" in text for text in product_label_texts)
-    assert any("Brand" in text for text in product_label_texts)
+    details = product_details_page.product_detail_labels_texts()
+    assert any("Category" in text for text in details)
+    assert any("Availability" in text for text in details)
+    assert any("Condition" in text for text in details)
+    assert any("Brand" in text for text in details)
 
     expect(product_details_page.name_review_input()).to_be_visible()
 

@@ -21,11 +21,14 @@ class ProductDetailsPage:
         return self.page.locator(
             ".product-information span span")
 
+    def product_detail_labels_texts(self) -> list[str]:
+        return self.page.locator("div.product-information p").all_inner_texts()
+
     def name_review_input(self) -> Locator:
         return self.page.get_by_placeholder("Your Name")
 
     def email_review_input(self) -> Locator:
-        return self.page.get_by_placeholder("Email Address")
+        return self.page.locator("#email")
 
     def review_input(self) -> Locator:
         return self.page.get_by_placeholder("Add Review Here!")
