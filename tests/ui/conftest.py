@@ -19,7 +19,7 @@ def should_block(url: str) -> bool:
 def page():
     with sync_playwright() as p:
         p.selectors.set_test_id_attribute("data-qa")
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=True)
         context = browser.new_context(viewport={"width": 1440, "height": 900})
 
         def handle_route(route):
