@@ -9,7 +9,7 @@ def delete_user(email: str, password: str) -> Response:
     return requests.delete(f"{BASE_URL}/deleteAccount", data={"email": email, "password": password})
 
 
-def create_user(payload) -> Response:
+def create_user(payload: dict) -> Response:
     return requests.post(f"{BASE_URL}/createAccount", data=payload)
 
 

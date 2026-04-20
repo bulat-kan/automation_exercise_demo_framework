@@ -80,17 +80,13 @@ def test_deleted_user_cannot_login():
     assert created_data["message"] == "User created!"
 
     # delete user
-    delete_payload = {
-        "email": email,
-        "password": password
-    }
     delete_response = delete_user(email, password)
     assert delete_response.status_code == 200
     data = delete_response.json()
     assert data["responseCode"] == 200
     assert data["message"] == "Account deleted!"
 
-    # attemp to login
+    # attempt to login
     login_response = verify_login(email, password)
     login_response_data = login_response.json()
     assert login_response.status_code == 200
