@@ -2,3 +2,4 @@ pytest==9.0.3
 playwright==1.55.0
 Faker==40.13.0
 requests
+pytest-xdist

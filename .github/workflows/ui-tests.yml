@@ -25,4 +25,4 @@ jobs:
         run: playwright install
 
       - name: Run tests
-        run: python -m pytest -v
+        run: python -m pytest -v -n 2
