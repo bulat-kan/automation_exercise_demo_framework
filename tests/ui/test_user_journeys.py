@@ -63,7 +63,7 @@ def test_user_is_able_to_login_add_product_from_product_details(page: Page):
     login_page = LoginPage(page)
     login_page.open()
 
-    valid_email = "thewitcher@mail.com"
+    valid_email = "theteacher@mail.com"
     valid_password = "Password@1"
     login_page.login(valid_email, valid_password)
 
