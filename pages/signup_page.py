@@ -1,15 +1,14 @@
 from playwright.sync_api import Page, Locator
+from config.settings import BASE_URL
 
 
 class SignupPage:
-
-    URL = "https://automationexercise.com/signup"
 
     def __init__(self, page: Page):
         self.page = page
 
     def open(self) -> None:
-        self.page.goto("https://automationexercise.com/signup")
+        self.page.goto(f"{BASE_URL}/signup")
 
     def title_mr(self) -> Locator:
         return self.page.get_by_label("Mr.")

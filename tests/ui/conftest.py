@@ -1,7 +1,7 @@
 from pathlib import Path
-
 import pytest
 from playwright.sync_api import sync_playwright
+from config.settings import HEADLESS
 
 
 AD_KEYWORDS = [
@@ -37,7 +37,7 @@ def pytest_runtest_makereport(item, call):
 def page(request):
     with sync_playwright() as p:
         p.selectors.set_test_id_attribute("data-qa")
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=HEADLESS)
         context = browser.new_context(viewport={"width": 1440, "height": 900})
 
         def handle_route(route):

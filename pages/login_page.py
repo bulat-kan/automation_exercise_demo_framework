@@ -1,10 +1,11 @@
 from playwright.sync_api import Page, Locator
 from pages.signup_page import SignupPage
+from config.settings import BASE_URL
 
 
 class LoginPage:
 
-    URL = "https://automationexercise.com/login"
+    URL = f"{BASE_URL}/login"
 
     def __init__(self, page: Page):
         self.page = page

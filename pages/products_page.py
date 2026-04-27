@@ -1,8 +1,9 @@
 from playwright.sync_api import Page, Locator
+from config.settings import BASE_URL
 
 
 class ProductsPage:
-    URL = "https://automationexercise.com/products"
+    URL = f"{BASE_URL}/products"
 
     def __init__(self, page: Page):
         self.page = page

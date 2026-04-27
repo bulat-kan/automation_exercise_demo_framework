@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, Locator
+from config.settings import BASE_URL
 
 
 class ProductDetailsPage:
@@ -8,7 +9,7 @@ class ProductDetailsPage:
 
     def open(self, page_num: str) -> None:
         self.page.goto(
-            f"https://automationexercise.com/product_details/{page_num}")
+            f"{BASE_URL}/product_details/{page_num}")
 
     def product_image(self) -> Locator:
         return self.page.locator("div.view-product img")

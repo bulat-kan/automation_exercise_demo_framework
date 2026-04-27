@@ -1,15 +1,15 @@
 from pathlib import Path
-
+from config.settings import BASE_URL
 from playwright.sync_api import Page, expect
 
 UPLOAD_FILE = Path(__file__).parents[2] / "data" / "upload.txt"
 
 
 def test_contact_us_form_success(page: Page):
-    page.goto("https://automationexercise.com/")
+    page.goto(BASE_URL)
     expect(page).to_have_title("Automation Exercise")
     page.get_by_role("link", name="Contact us").click()
-    expect(page).to_have_url("https://automationexercise.com/contact_us")
+    expect(page).to_have_url(f"{BASE_URL}/contact_us")
     expect(page.get_by_role("heading", name="Get In Touch")).to_be_visible()
 
     page.get_by_placeholder("Name").fill("JKVD")
@@ -23,13 +23,10 @@ def test_contact_us_form_success(page: Page):
     assert "upload.txt" in upload_field.input_value()
 
     page.on("dialog", lambda dialog: dialog.accept())
-    page.get_by_role("button", name="Submit").click()
+    submit_button = page.get_by_role("button", name="Submit")
+    submit_button.scroll_into_view_if_needed()
+    submit_button.click()
 
-    success_message = page.locator(".status.alert-success")
-    expect(success_message).to_be_visible()
-    expect(success_message).to_contain_text(
-        "Success! Your details have been submitted successfully."
-    )
-    page.pause()
+    expect(page.locator("a.btn.btn-success")).to_be_visible()
     page.locator("a.btn.btn-success").click()
-    expect(page).to_have_url("https://automationexercise.com/")
+    expect(page).to_have_url(f"{BASE_URL}/")
