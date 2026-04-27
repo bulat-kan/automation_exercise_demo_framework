@@ -6,6 +6,7 @@ from faker import Faker
 from pages.signup_page import SignupPage
 from pages.product_details_page import ProductDetailsPage
 from uuid import uuid4
+from config.settings import BASE_URL
 
 
 def test_logged_in_user_can_add_product_to_cart(page: Page):
@@ -14,13 +15,13 @@ def test_logged_in_user_can_add_product_to_cart(page: Page):
     password = "Password@1"
     login_page.open()
     login_page.login(email, password)
-    expect(page).to_have_url("https://automationexercise.com/")
+    expect(page).to_have_url(f"{BASE_URL}/")
     expect(page.get_by_role("link", name="Logout")).to_be_visible()
     clean_cart_if_not_empty(page)
 
     product_page = ProductsPage(page)
     product_page.open()
-    expect(page).to_have_url("https://automationexercise.com/products")
+    expect(page).to_have_url(f"{BASE_URL}/products")
 
     product_name = "Blue Top"
     add_searched_product_and_open_cart(product_name, product_page)
@@ -50,7 +51,7 @@ def test_user_can_signup_login_logout(page: Page):
     expect(page.get_by_role("heading", name="Account Created!")).to_be_visible()
 
     page.get_by_role("link", name="Continue").click()
-    expect(page).to_have_url("https://automationexercise.com/")
+    expect(page).to_have_url(f"{BASE_URL}/")
     expect(page.get_by_text(f"Logged in as {f_name} {l_name}")).to_be_visible()
 
     page.get_by_role("link", name="Logout").click()
@@ -76,7 +77,7 @@ def test_user_is_able_to_login_add_product_from_product_details(page: Page):
     prod_details_page.add_to_cart_btn().click()
     expect(prod_details_page.modal_added_header()).to_be_visible()
     prod_details_page.modal_added_body_view_cart_link().click()
-    expect(page).to_have_url("https://automationexercise.com/view_cart")
+    expect(page).to_have_url(f"{BASE_URL}/view_cart")
     product_name_in_cart = page.locator(
         ".cart_description a").inner_text().strip().lower()
     assert product_name == product_name_in_cart

@@ -3,6 +3,7 @@ from playwright.sync_api import Page, expect
 from api.user_api import create_user, delete_user
 from data.user_payloads import new_user_payload
 from pages.login_page import LoginPage
+from config.settings import BASE_URL
 
 
 def test_api_created_user_can_login_via_ui(page: Page):
@@ -22,7 +23,7 @@ def test_api_created_user_can_login_via_ui(page: Page):
         login_page = LoginPage(page)
         login_page.open()
         login_page.login(email, password)
-        expect(page).to_have_url("https://automationexercise.com/")
+        expect(page).to_have_url(f"{BASE_URL}/")
         expect(login_page.logout_link()).to_be_visible()
 
         login_page.logout_link().click()

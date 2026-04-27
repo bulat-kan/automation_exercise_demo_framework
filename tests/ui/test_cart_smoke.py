@@ -1,10 +1,11 @@
 from playwright.sync_api import expect, Page
 from pages.products_page import ProductsPage
 from utils.cart_helpers import add_searched_product_and_open_cart
+from config.settings import BASE_URL
 
 
 def test_cart_page_opens(page: Page):
-    page.goto("https://automationexercise.com/view_cart")
+    page.goto(f"{BASE_URL}/view_cart")
     expect(page).to_have_title("Automation Exercise - Checkout")
     expect(page.locator("#cart_items li.active")).to_be_visible()
     expect(page.get_by_text(

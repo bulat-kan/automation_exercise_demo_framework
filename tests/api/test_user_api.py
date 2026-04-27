@@ -1,8 +1,8 @@
 import requests
 from data.user_payloads import new_user_payload
 from api.user_api import create_user, delete_user, verify_login, get_user_details_by_email
-
-BASE_URL = "https://automationexercise.com/api"
+from config.settings import API_BASE_URL
+BASE_URL = API_BASE_URL
 
 
 def test_create_user():

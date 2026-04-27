@@ -1,8 +1,7 @@
 import requests
 from faker import Faker
 from uuid import uuid4
-
-BASE_URL = "https://automationexercise.com"
+from config.settings import API_BASE_URL
 
 
 # Expected response shape:
@@ -12,7 +11,7 @@ BASE_URL = "https://automationexercise.com"
 # }
 
 def test_get_all_products():
-    response = requests.get(f"{BASE_URL}/api/productsList")
+    response = requests.get(f"{API_BASE_URL}/productsList")
 
     assert response.status_code == 200
     data = response.json()
@@ -23,7 +22,7 @@ def test_get_all_products():
 
 def test_post_to_all_products_list():
     payload = {"cellphone": "iphone 21"}
-    response = requests.post(f"{BASE_URL}/api/productsList", payload)
+    response = requests.post(f"{API_BASE_URL}/productsList", payload)
 
     assert response.status_code == 200
     data = response.json()
@@ -33,7 +32,7 @@ def test_post_to_all_products_list():
 
 
 def test_get_all_brands_list():
-    response = requests.get(f"{BASE_URL}/api/brandsList")
+    response = requests.get(f"{API_BASE_URL}/brandsList")
     assert response.status_code == 200
     data = response.json()
 
@@ -44,7 +43,7 @@ def test_get_all_brands_list():
 
 def test_put_to_all_brands():
     payload = {"brand": "samsung"}
-    response = requests.put(f"{BASE_URL}/api/brandsList", data=payload)
+    response = requests.put(f"{API_BASE_URL}/brandsList", data=payload)
 
     assert response.status_code == 200
     data = response.json()
@@ -55,7 +54,7 @@ def test_put_to_all_brands():
 def test_product_search():
     product_to_search_for = "Beautiful Peacock Blue Cotton Linen Saree"
     payload = {"search_product": product_to_search_for}
-    response = requests.post(f"{BASE_URL}/api/searchProduct", data=payload)
+    response = requests.post(f"{API_BASE_URL}/searchProduct", data=payload)
     assert response.status_code == 200
     data = response.json()
 
@@ -67,7 +66,7 @@ def test_product_search():
 
 def test_product_search_without_product():
     payload = {}
-    response = requests.post(f"{BASE_URL}/api/searchProduct", payload)
+    response = requests.post(f"{API_BASE_URL}/searchProduct", payload)
     data = response.json()
 
     assert response.status_code == 200
@@ -78,7 +77,7 @@ def test_product_search_without_product():
 
 def test_product_search_non_existing_product():
     payload = {"search_product": "iphone 25"}
-    response = requests.post(f"{BASE_URL}/api/searchProduct", data=payload)
+    response = requests.post(f"{API_BASE_URL}/searchProduct", data=payload)
     assert response.status_code == 200
     data = response.json()
     assert "products" in data

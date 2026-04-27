@@ -2,6 +2,7 @@ from playwright.sync_api import expect, Page
 from uuid import uuid4
 from faker import Faker
 from pages.login_page import LoginPage
+from config.settings import BASE_URL
 
 
 def test_new_user_can_signup(page: Page):
@@ -39,11 +40,11 @@ def test_new_user_can_signup(page: Page):
 
     signup_page.create_account_btn().click()
 
-    expect(page).to_have_url("https://automationexercise.com/account_created")
+    expect(page).to_have_url(f"{BASE_URL}/account_created")
     expect(page.get_by_role("heading", name="Account Created!")).to_be_visible()
 
     page.get_by_role("link", name="Continue").click()
-    expect(page).to_have_url("https://automationexercise.com/")
+    expect(page).to_have_url(f"{BASE_URL}/")
     expect(page.get_by_role("link", name="Logout")).to_be_visible()
 
 
@@ -58,7 +59,7 @@ def test_existing_user_cannot_signup(page: Page):
     login_page.initial_signup(existing_user, existing_email)
 
     expect(page.get_by_text("Email Address already exist!")).to_be_visible()
-    expect(page).to_have_url("https://automationexercise.com/signup")
+    expect(page).to_have_url(f"{BASE_URL}/signup")
 
 
 def test_new_user_cant_signup_without_filling_out_required_fields(page: Page):
@@ -75,7 +76,7 @@ def test_new_user_cant_signup_without_filling_out_required_fields(page: Page):
     name = f"{first_name} {last_name}"
     signup_page = login_page.initial_signup(name, email)
 
-    expect(page).to_have_url("https://automationexercise.com/signup")
+    expect(page).to_have_url(f"{BASE_URL}/signup")
     expect(page.get_by_role(
         "heading", name="Enter Account Information")).to_be_visible()
 
