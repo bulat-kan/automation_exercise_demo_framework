@@ -30,6 +30,6 @@ def test_contact_us_form_success(page: Page):
     expect(success_message).to_contain_text(
         "Success! Your details have been submitted successfully."
     )
-
+    page.pause()
     page.locator("a.btn.btn-success").click()
     expect(page).to_have_url("https://automationexercise.com/")

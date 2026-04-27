@@ -48,15 +48,24 @@ def page(request):
                 route.continue_()
 
         context.route("**/*", handle_route)
+        context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
         page = context.new_page()
         try:
             yield page
             if request.node.report_call.failed:
+                artifact_name = safe_artifact_name(request.node.nodeid)
+
                 screenshot_dir = Path("test-results/screenshots")
                 screenshot_dir.mkdir(parents=True, exist_ok=True)
-                screenshot_path = screenshot_dir / \
-                    f"{safe_artifact_name(request.node.nodeid)}.png"
+                screenshot_path = screenshot_dir / f"{artifact_name}.png"
                 page.screenshot(path=str(screenshot_path), full_page=True)
+
+                trace_dir = Path("test-results/traces")
+                trace_dir.mkdir(parents=True, exist_ok=True)
+                trace_path = trace_dir / f"{artifact_name}.zip"
+                context.tracing.stop(path=str(trace_path))
+            else:
+                context.tracing.stop()
         finally:
             browser.close()
